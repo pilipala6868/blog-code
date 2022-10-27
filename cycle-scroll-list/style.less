@@ -1,0 +1,25 @@
+@itemHeight: 30px; // 单个item的高度
+
+@itemShowTime: 5s; // 单个item从完整出现到消失的时长
+@oneCycleItemNum: 5; // 单个循环上移的item条数
+@oneScreenItemNum: 3; // 同屏出现的item条数（不能大于 oneCycleItemNum）
+
+@oneCycleItemTime: calc(@itemShowTime + (@oneCycleItemNum - @oneScreenItemNum) * (@itemShowTime / @oneScreenItemNum));
+
+.container {
+  height: @itemHeight * @oneScreenItemNum;
+  overflow: hidden;
+  animation: dynamics-rolling @oneCycleItemTime linear infinite;
+  div {
+    line-height: @itemHeight;
+  }
+}
+
+@keyframes dynamics-rolling {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-@itemHeight * @oneCycleItemNum);
+  }
+}
